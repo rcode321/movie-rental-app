@@ -1,25 +1,50 @@
 import React, { Component } from "react";
+import Container from "react-bootstrap/Container";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 class Counter extends Component {
   render() {
     return (
-      <div>
-        <Badge variant={this.getBadgeClasses()}>{this.formatCount()}</Badge>
-        <Button
-          onClick={() => this.props.onIncrement(this.props.counter)}
-          variant="secondary"
-        >
-          Increment
-        </Button>
-        <Button
-          onClick={() => this.props.onDelete(this.props.counter.id)}
-          variant="danger m-2"
-        >
-          Delete
-        </Button>
-      </div>
+      <Container fluid>
+        <Row>
+          <Col xs={2}>
+            <Badge variant={this.getBadgeClasses()}>{this.formatCount()}</Badge>
+          </Col>
+
+          <Col xs={2}>
+            <Button
+              onClick={() => this.props.onIncrement(this.props.counter)}
+              variant="secondary mt-2"
+            >
+              <i className="fa fa-plus" aria-hidden="true"></i>
+            </Button>
+          </Col>
+
+          <Col xs={2}>
+            <Button
+              onClick={() => this.props.onDecrement(this.props.counter)}
+              variant="secondary m-2"
+              disabled={
+                this.props.counter.value === 0 ? "secondary disabled m-2" : ""
+              }
+            >
+              <i className="fa fa-minus" aria-hidden="true"></i>
+            </Button>
+          </Col>
+
+          <Col>
+            <Button
+              onClick={() => this.props.onDelete(this.props.counter.id)}
+              variant="danger mt-2"
+            >
+              <i className="fa fa-times" aria-hidden="true"></i>
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 
